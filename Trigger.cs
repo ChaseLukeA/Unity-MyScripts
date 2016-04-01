@@ -1,6 +1,7 @@
 ﻿/**
+ *
  * Trigger Script
- * by Luke A Chase - chase.luke.a@gmail.com
+ * Created by Luke A Chase - chase.luke.a@gmail.com
  * 
  * -------------------------------------------------------------
  * Applying this script to a game object allows choosing of the
@@ -8,15 +9,17 @@
  * multiple objects and all properties assigned to them
  * -------------------------------------------------------------
  * 
- * Fields:
+ * Editor Fields:
  * Triggering Layer - the game layer (defined in GameUtility.cs
  *                    as a Layer enum) to trigger on collision
  *                    with this gameObject
- * TriggeredEvents - the object(s) selected, their component(s),
- *                   and the actions/events to trigger
+ * Triggered Events - the object(s) selected, their component(s),
+ *                    and the actions/events to trigger
  * 
+ * -------------------------------------------------------------
  * Use this in conjunction with the GameUtility.cs class for the
  * new data types
+ * -------------------------------------------------------------
 */
 
 using System;
@@ -41,6 +44,7 @@ namespace UnityEngine.UI
 			gameObject.GetComponent<BoxCollider> ().isTrigger = true;
 		}
 
+
 		void OnTriggerEnter (Collider collider)
 		{
 			if (collider.gameObject.layer == (int)triggeringLayer)
@@ -49,4 +53,5 @@ namespace UnityEngine.UI
 			}
 		}
 	}
+
 }

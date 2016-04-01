@@ -1,36 +1,38 @@
 ﻿/**
+ *
  * TransformPositionOnSingleAxis Script
- * by Luke A Chase - chase.luke.a@gmail.com
+ * Created by Luke A Chase - chase.luke.a@gmail.com
  *
  * -------------------------------------------------------------
  * Applying this script to a game object will allow the object
  * to move between two points on a signle axis.
  * -------------------------------------------------------------
  *
- * Fields:
- * Move Axis - the axis to move on
- * Move Amount - the amount (in meters) to move
- * Move Speed - the speed to move (based on fps)
+ * Editor Fields:
+ * Move Axis      - the axis to move on
+ * Move Amount    - the amount (in meters) to move
+ * Move Speed     - the speed to move (based on fps)
  * Start Position - the position the object should start at:
  *                  Origin: initial position in the editor
  *                  Destination: the final position traveled to
- * Auto Moves - the object will automatically move from start
- *              to end point on the specified axis
- * Enabled - the movement of the object is allowed or disallowed
- *           (to be used with a switch - turn it on or off)
+ * Auto Moves     - the object will automatically move from start
+ *                  to end point on the specified axis
+ * Enabled        - the movement of the object is/isn't allowed
+ *                  (i.e. use as a switch - turn it on or off)
  *
+ * -------------------------------------------------------------
  * Use this in conjunction with the GameUtility.cs class for the
  * new data types; Trigger this script with the Trigger.cs class
+ * -------------------------------------------------------------
 */
 
 using System.Collections;
 using UnityEngine;
 
-
 public class TransformPositionOnSingleAxis : MonoBehaviour
 {
 	[SerializeField] private Axis moveAxis;
-	[SerializeField] private float moveAmount;  // in meters
+	[SerializeField] private float moveAmount;
 	[SerializeField] private float moveSpeed;
 	[SerializeField] private MoveTo startPosition;
 	[SerializeField] private bool autoMoves;
@@ -47,7 +49,6 @@ public class TransformPositionOnSingleAxis : MonoBehaviour
 	private bool toggled;
 
 
-	// Use this for initialization
 	void Start ()
 	{
 		movedAmount = 0;
@@ -60,7 +61,7 @@ public class TransformPositionOnSingleAxis : MonoBehaviour
 			currentPosition = originPosition;
 			destinationPosition = newPosition (originPosition, moveAxis, moveAmount);
 		}
-		else // startPosition == MoveTo.Destination
+		else // startPosition is MoveTo.Destination
 		{
 			moveToPosition = MoveTo.Origin;
 			originPosition = newPosition (transform.position, moveAxis, moveAmount);
@@ -81,8 +82,8 @@ public class TransformPositionOnSingleAxis : MonoBehaviour
 	}
 
 
-	// when called with toggle() it runs until the destination has been
-	// reached, at which point move(0) will set toggled to false again
+	// when Toggle() is called, object moves until the destination
+    // has been reached, at which point the object will stop moving
 	public void Toggle ()
 	{
 		if (enabled)
@@ -90,6 +91,7 @@ public class TransformPositionOnSingleAxis : MonoBehaviour
 			toggled = true;
 		}
 	}
+
 
 	public void Enable ()
 	{
@@ -114,7 +116,7 @@ public class TransformPositionOnSingleAxis : MonoBehaviour
 	}
 
 
-	// for setting start or restart position
+	// for setting the objects inital start, or restart, position
 	Vector3 newPosition(MoveTo newPosition)
 	{
 		if (newPosition == MoveTo.Origin)
@@ -193,7 +195,7 @@ public class TransformPositionOnSingleAxis : MonoBehaviour
 		}
 		else
 		{
-			return moveDirection;
+			return moveDirection;  // keep moving the same direction
 		}
 	}
 
